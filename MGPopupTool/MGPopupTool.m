@@ -195,6 +195,7 @@ typedef NS_ENUM(NSUInteger, MGPopupType) {
     if (!self.showState) {
         return;
     }
+    [self endEditing:YES];
     self.showState = NO;
     [self willHide];
     switch (self.type) {
@@ -218,6 +219,9 @@ typedef NS_ENUM(NSUInteger, MGPopupType) {
 #pragma mark - 辅助方法
 
 - (void)_setupCommon {
+    if (!self.superview) {
+        [self.window addSubview:self];
+    }
     self.contentView.frame = self.showView.frame;
     [self.contentView addSubview:self.showView];
     CGRect frame = self.showView.frame;
@@ -242,9 +246,6 @@ typedef NS_ENUM(NSUInteger, MGPopupType) {
 
 - (void)_showMoveFromBottom {
     __weak typeof(self) weakSelf = self;
-    if (!self.superview) {
-        [self.window addSubview:self];
-    }
     [UIView animateWithDuration:_duration animations:^{
         [weakSelf _setBackgroundViewAlpha:_A];
         CGRect showFrame = weakSelf.contentView.frame;
@@ -259,9 +260,6 @@ typedef NS_ENUM(NSUInteger, MGPopupType) {
 
 - (void)_showShowInMiddle {
     __weak typeof(self) weakSelf = self;
-    if (!self.superview) {
-        [self.window addSubview:self];
-    }
     [UIView animateWithDuration:_duration animations:^{
         [weakSelf _setBackgroundViewAlpha:_A];
         [weakSelf _setContentViewAlpha:1];

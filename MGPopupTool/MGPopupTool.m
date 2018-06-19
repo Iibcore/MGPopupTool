@@ -247,7 +247,7 @@ typedef NS_ENUM(NSUInteger, MGPopupType) {
 - (void)_showMoveFromBottom {
     __weak typeof(self) weakSelf = self;
     [UIView animateWithDuration:_duration animations:^{
-        [weakSelf _setBackgroundViewAlpha:_A];
+        [weakSelf _setBackgroundViewAlpha:weakSelf.A];
         CGRect showFrame = weakSelf.contentView.frame;
         showFrame.origin.y -= weakSelf.contentView.frame.size.height;
         weakSelf.contentView.frame = showFrame;
@@ -261,7 +261,7 @@ typedef NS_ENUM(NSUInteger, MGPopupType) {
 - (void)_showShowInMiddle {
     __weak typeof(self) weakSelf = self;
     [UIView animateWithDuration:_duration animations:^{
-        [weakSelf _setBackgroundViewAlpha:_A];
+        [weakSelf _setBackgroundViewAlpha:weakSelf.A];
         [weakSelf _setContentViewAlpha:1];
     } completion:^(BOOL finished) {
         if (finished && weakSelf.showState) {
